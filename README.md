@@ -66,10 +66,10 @@ Este projeto foi realizado como desafio técnico para a fim de melhorar minha ha
  - [x] 💯 Configuração do gerenciamento de estado **Redux Thunks** com posterior migração para o **Redux Saga**;
  
 ##### 👉 Novas implementações/features a serem realizadas(sem ordem definida):
- - [ ] 👨‍💻  Implementado *paginação, ordenação, filtro* na tabela de histórico de Vendas;
- - [ ] 👨‍💻  Implementado *filtro* na home page;
+ - [ ] 👨‍💻  Implementar *paginação, ordenação, filtro* na tabela de histórico de Vendas;
+ - [ ] 👨‍💻  Implementar *filtro* na home page;
  - [ ] 👨‍💻  Melhorar design das páginas;
- - [ ] 👨‍💻  Implementação da funcionalidade avaliação de produtos;
+ - [ ] 👨‍💻  Implementar da funcionalidade avaliação de produtos;
  - [ ] 👨‍💻  Gerenciar os formulário por meio do Formik;
  - [ ] 👨‍💻  Deploy no Heroku;
 
@@ -155,10 +155,10 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 </h6>
 
 <p align="center">
-    <a href="https://www.linkedin.com/in/abnerwillys/">
-        <img 
-            alt="Linkedin Joao Paulo Rodrigues" 
-            src="https://www.linkedin.com/in/joaorpereira/">
+    <a href="https://www.linkedin.com/in/joaorpereira">
+    <img 
+        alt="Linkedin Joao Paulo Rodrigues" 
+        src="https://img.shields.io/badge/-Joao%20Paulo-%230077b5?style=flat-square&logo=linkedin">
     </a>
     <a href="mailto:rpjoaopaulo28@gmail.com">
         <img 
