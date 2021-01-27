@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/abnerwillys/">
+  <a href="https://www.linkedin.com/in/joaorpereira/">
     <img 
         alt="Made by Joao Paulo" 
         src="https://img.shields.io/badge/MADE%20BY-Abner%20Willys-%230077b5?style=flat-square&logo=linkedin">
