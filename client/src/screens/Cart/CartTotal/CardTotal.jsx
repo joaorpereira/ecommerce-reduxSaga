@@ -55,5 +55,7 @@ const useStyles = makeStyles({
     marginTop: "-10px",
     width: "220px",
     boxShadow: "none",
+    color: '#fff',
+    fontWeight: 900
   },
 });

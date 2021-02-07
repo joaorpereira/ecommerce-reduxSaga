@@ -7,28 +7,6 @@ import { saveShippingAddress } from '../../store/modules/Cart/cartActions'
 import StepperComponent from '../../components/Stepper/Stepper'
 import Button from '../../components/Button/Button'
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '500px',
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(0),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-}))
-
 const Shipping = () => {
   const classes = useStyles()
 
@@ -103,7 +81,7 @@ const Shipping = () => {
               />
             </Grid>
           </Grid>
-          <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
+          <Button type='submit' fullWidth variant='contained' size='big' color='primary' className={classes.submit}>
             Continue
           </Button>
         </form>
@@ -113,3 +91,30 @@ const Shipping = () => {
 }
 
 export default Shipping
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '500px',
+  },
+  form: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  submit: {
+    margin: theme.spacing(2, 0, 2),
+    fontWeight: 900,
+    boxShadow: "none",
+    color: '#fff',
+  },
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}))

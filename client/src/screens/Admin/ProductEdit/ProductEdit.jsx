@@ -21,10 +21,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   form: {
-    width: '100%',
+    width: 725,
     display: 'flex',
     justifyContent: 'center',
+    marginTop: '20px'
   },
+  submit: {
+    color:'#fff',
+    boxShadow: 'none',
+    fontWeight: 900,
+  }
 }))
 
 const ProductEdit = () => {
@@ -209,14 +215,23 @@ const ProductEdit = () => {
               <Button
                 onClick={() => history.push('/admin/products')}
                 fullWidth
-                variant='outlined'
+                type='large'
+                color='secondary' 
+                variant='contained'
                 className={classes.submit}
               >
-                Go Back
+                Return
               </Button>
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
-              <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
+              <Button 
+                type='submit' 
+                fullWidth 
+                variant='contained' 
+                size='large'
+                color='primary' 
+                className={classes.submit}
+              >
                 Update
               </Button>
             </Grid>

@@ -4,12 +4,6 @@ import {Card, CardActions, CardContent, Typography} from '@material-ui/core'
 import Button from '../../../components/Button/Button'
 import * as S from './styled'
 
-const useStyles = makeStyles({
-  root: {
-    width: 275,
-  },
-})
-
 const OrderSummary = ({ cartItems, placeOrderHandler, orderSummary }) => {
   const classes = useStyles()
 
@@ -20,7 +14,7 @@ const OrderSummary = ({ cartItems, placeOrderHandler, orderSummary }) => {
       <S.StyledTypography variant='h6'>
         <strong>ORDER SUMMARY</strong>
       </S.StyledTypography>
-      <CardContent style={{ display: 'flex', flexDirection: 'column', marginTop: '-10px' }}>
+      <CardContent className={classes.content} >
         <S.StyledDivider />
         <Typography variant='body1'>
           <strong>Items:</strong>
@@ -43,11 +37,12 @@ const OrderSummary = ({ cartItems, placeOrderHandler, orderSummary }) => {
         </Typography>
         <S.StyledDivider />
       </CardContent>
-      <CardActions>
+      <CardActions className={classes.actions}>
         <Button
-          style={{ marginTop: '-10px', marginBottom: '10px' }}
+          className={classes.button}
           fullWidth
           variant='contained'
+          color='secondary'
           size='big'
           disable={cartItems === 0}
           onClick={placeOrderHandler}
@@ -60,3 +55,27 @@ const OrderSummary = ({ cartItems, placeOrderHandler, orderSummary }) => {
 }
 
 export default OrderSummary
+
+const useStyles = makeStyles({
+  root: {
+    width: 275,
+  },
+  button: {
+    width: '220px',
+    fontWeight: 900,
+    boxShadow: "none",
+    color: '#fff',
+    marginTop: '-10px', 
+    marginBottom: '10px'
+  },
+  content: {
+    display: 'flex', 
+    flexDirection: 'column', 
+    marginTop: '-10px'
+  },
+  actions:{
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center'
+  }
+})

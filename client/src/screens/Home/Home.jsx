@@ -5,16 +5,14 @@ import Product from "../../components/Cart/Cart";
 import Loading from "../../components/Loading/Loading";
 
 import {
-  Chip,
   Grid,
   Fade,
   FormControlLabel,
   Slider,
   Switch,
   TextField,
-  Typography,
 } from "@material-ui/core";
-import { StyledWrap, StyledFilter, StyledFilterItem } from "./styled";
+import { StyledWrap, StyledFilter, StyledFilterItem, StyledButton } from "./styled";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../store/modules/Product/productActions";
@@ -28,7 +26,8 @@ const Home = () => {
 
   const [checked, setChecked] = useState(false);
   const [value, setValue] = useState([0, 10000]);
-  // const [productName, setProductName] = useState("");
+  const [productName, setProductName] = useState("");
+  const [orderBy, setOrderBy] = useState(null)
 
   const [newList, setNewList] = useState(null);
 
@@ -42,56 +41,25 @@ const Home = () => {
 
   useEffect(() => {
     setNewList(productsList);
-  }, []);
+  }, [productsList]);
 
-  const [chipData, setChipData] = useState([
-    { key: 0, label: "Angular" },
-    { key: 1, label: "jQuery" },
-    { key: 2, label: "Polymer" },
-    { key: 3, label: "React" },
-    { key: 4, label: "Vue.js" },
-  ]);
+  const chipData = [
+    { key: 0, label: "Crescente" },
+    { key: 1, label: "Descrescente" },
+  ]
 
-  const handleChange = () => {
+  const handleFilter = () => {
     setChecked(!checked);
+    setValue([0, 10000]);
+    setProductName("");
+    setOrderBy(null)
   };
 
   const handleSlider = (event, newValue) => {
     setValue(newValue);
   };
 
-  // const productNameFilter = (e) => {
-  //   const value = e.target.value;
-  //   setProductName(value);
-  //   let filtered = productsList;
-
-  //   if (value.length > 0) {
-  //     const newData = filtered.filter((product) =>
-  //       product.name.trim().toLowerCase().includes(value.trim().toLowerCase())
-  //     );
-  //     setNewList(newData);
-  //   } else {
-  //     setNewList(filtered);
-  //   }
-  // };
-
-  const priceFilter = () => {
-    let filtered = productsList;
-    let newProducList = null;
-    if (value[0]) {
-      newProducList = filtered.filter(
-        (item) => Math.ceil(item.price) > value[0] && item
-      );
-    } else if (value[1]) {
-      newProducList = filtered.filter(
-        (item) => Math.ceil(item.price) < value[1] && item
-      );
-    }
-    setNewList(newProducList);
-  };
-
   const addToCartHandler = (id) => {
-    console.log(id);
     if (isLoggedIn && id) {
       dispatch(addToCartRequest({ id: id, quantity: 1 }));
       history.push("/cart");
@@ -100,16 +68,36 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    priceFilter();
-  }, [value]);
+  const body = newList && 
+    newList
+      .sort((a,b) => orderBy === 0 ? (a.price) - (b.price) : null)
+      .sort((a,b) => orderBy === 1 ? (b.price) - (a.price) : null)
+      .filter(product => product.name.toLowerCase().includes(productName.toLowerCase()))
+      .filter((product) => Math.ceil(product.price) > value[0] && product)
+      .filter((product) => Math.ceil(product.price) < value[1] && product)
+      .map((product) => (
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            lg={3}
+            className={classes.control}
+            key={product._id}
+          >
+            <Product
+              id={product._id}
+              addToCartHandler={addToCartHandler}
+              product={product}
+            />
+          </Grid>
+      ))   
 
   return (
     <div className={classes.root}>
       <h2 style={{ marginLeft: "45px" }}>Products</h2>
       <FormControlLabel
         style={{ marginLeft: "37px", marginBottom: "15px" }}
-        control={<Switch checked={checked} onChange={handleChange} />}
+        control={<Switch checked={checked} onChange={handleFilter} />}
         label="Filters"
       />
       {loading ? (
@@ -127,15 +115,13 @@ const Home = () => {
                       fullWidth
                       label="Product Name"
                       InputLabelProps={{ shrink: true }}
-                      // value={productName}
-                      // onChange={(e) => productNameFilter(e)}
+                      value={productName}
+                      onChange={(e) => setProductName(e.target.value)}
                     />
                   </StyledFilterItem>
-                  <StyledFilterItem>
-                    <Typography gutterBottom style={{ marginBottom: "40px" }}>
-                      Price
-                    </Typography>
+                  <StyledFilterItem style={{display: 'flex', justifyContent: 'center', marginTop: "45px"}}>
                     <Slider
+                      style={{width: 150}}
                       color="secondary"
                       value={value}
                       onChange={handleSlider}
@@ -147,15 +133,13 @@ const Home = () => {
                   <StyledFilterItem>
                     <StyledWrap>
                       {chipData.map((data) => (
-                        <div key={data.key}>
-                          <Chip
-                            label={data.label}
-                            // onDelete={
-                            //   data.label === "React" ? undefined : handleDelete(data)
-                            // }
-                            // className={classes.chip}
-                          />
-                        </div>
+                          <StyledButton
+                            key={data.key}
+                            onClick={() => setOrderBy(data.key)}                           
+                            backGround={orderBy}                          
+                          >
+                            {data.label}
+                          </StyledButton>
                       ))}
                     </StyledWrap>
                   </StyledFilterItem>
@@ -165,23 +149,7 @@ const Home = () => {
           )}
           <Grid item xs={checked ? 10 : 12} style={{ width: "100%" }}>
             <Grid container spacing={3}>
-              {newList &&
-                newList.map((product) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={4}
-                    lg={3}
-                    className={classes.control}
-                    key={product._id}
-                  >
-                    <Product
-                      id={product._id}
-                      addToCartHandler={addToCartHandler}
-                      product={product}
-                    />
-                  </Grid>
-                ))}
+              {body}
             </Grid>
           </Grid>
         </Grid>

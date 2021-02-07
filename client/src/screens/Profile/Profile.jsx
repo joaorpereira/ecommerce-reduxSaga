@@ -24,7 +24,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2, 0, 2),
+    color:'#fff',
+    boxShadow: 'none',
+    fontWeight: 900,
   },
 }))
 
@@ -117,7 +120,14 @@ const Profile = () => {
                 value={password2}
                 onChange={(e) => setPassword2(e.target.value)}
               />
-              <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
+              <Button 
+                type='submit' 
+                fullWidth 
+                variant='contained' 
+                color='primary' 
+                className={classes.submit}
+                size='large'
+              >
                 Update
               </Button>
             </form>

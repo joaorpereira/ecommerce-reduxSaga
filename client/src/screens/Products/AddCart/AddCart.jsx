@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   Divider,
   FormControl,
-  InputLabel,
   MenuItem,
   Select,
   Typography,
@@ -32,15 +31,15 @@ const AddCart = ({ product, addToCartHandler, setQuantity, quantity }) => {
         </Typography>
         <Divider />
         {countInStock > 0 ? (
-          <>
+          <div className={classes.quantity}>
+            <Typography>
+              <strong>Quantity:</strong>&nbsp;
+            </Typography>
             <FormControl
               size="small"
               variant="outlined"
               className={classes.formControl}
             >
-              <InputLabel shrink id="quantity" className={classes.label}>
-                Quantity
-              </InputLabel>
               <Select
                 labelId="quantity"
                 value={quantity}
@@ -54,7 +53,7 @@ const AddCart = ({ product, addToCartHandler, setQuantity, quantity }) => {
               </Select>
             </FormControl>
             <Divider />
-          </>
+          </div>
         ) : (
           <div style={{ height: "60px" }} />
         )}
@@ -65,7 +64,7 @@ const AddCart = ({ product, addToCartHandler, setQuantity, quantity }) => {
           fullWidth
           variant="contained"
           size="big"
-          color="secondary"
+          color="secondary"          
           disable={countInStock === 0}
           onClick={addToCartHandler}
         >
@@ -88,8 +87,8 @@ const useStyles = makeStyles({
     fontSize: 14,
   },
   formControl: {
-    width: "100px",
-    margin: "10px 0px 10px 0px",
+    width: "70px",
+    margin: "10px 00px 10px 5px",
   },
   label: {
     backgroundColor: "#fff",
@@ -100,5 +99,11 @@ const useStyles = makeStyles({
     marginTop: "-10px",
     width: "220px",
     boxShadow: "none",
+    color: '#fff',
+    fontWeight: 900,
   },
+  quantity:{
+    display:'flex',
+    alignItems: 'center',
+  }
 });

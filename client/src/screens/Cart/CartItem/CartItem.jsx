@@ -46,12 +46,8 @@ const CartItem = ({ cart, setId, setQuantity, removeFromCart }) => {
             ))}
           </Select>
         </FormControl>
-        <IconButton
-          style={{ marginLeft: "20px" }}
-          onClick={() => dispatch(removeFromCart(product))}
-          aria-label="delete"
-        >
-          <DeleteIcon />
+        <IconButton className={classes.trash} onClick={() => dispatch(removeFromCart(product))}>
+          <DeleteIcon className={classes.trashIcon} />
         </IconButton>
       </StyledListItem>
       <Divider style={{ margin: "10px 0px 0px 30px", width: "75%" }} />
@@ -61,7 +57,7 @@ const CartItem = ({ cart, setId, setQuantity, removeFromCart }) => {
 
 export default CartItem;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     maxWidth: "100%",
@@ -79,4 +75,11 @@ const useStyles = makeStyles(() => ({
     padding: "0px 5px",
     color: "#000",
   },
+  trash: {
+    marginLeft: "20px", 
+    background: 'none !important'
+  },
+  trashIcon: {
+    "&:hover": { color: theme.palette.secondary.main }
+  }
 }));

@@ -4,6 +4,8 @@ import { Grid, makeStyles } from '@material-ui/core'
 import Table from '../../../components/Table/Table'
 import Loading from '../../../components/Loading/Loading'
 import Button from '../../../components/Button/Button'
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { columns } from './columns'
@@ -11,24 +13,6 @@ import { useHistory } from 'react-router'
 import * as actions from '../../../store/modules/Product/productActions'
 import { PRODUCT_CREATE_RESET } from '../../../store/modules/Product/productTypes'
 import { createProductRequest, deleteProductRequest } from '../../../store/modules/Product/productActions'
-
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: '100%',
-    margin: '0px',
-    padding: '15px',
-    marginBottom: '50px',
-  },
-  product: {
-    flexGrow: 1,
-  },
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-}))
 
 function ProductList() {
   const dispatch = useDispatch()
@@ -87,14 +71,16 @@ function ProductList() {
           <Button
             variant='contained'
             color='primary'
+            className={classes.button}
             style={{ marginRight: '10px' }}
             onClick={() => history.push(`/admin/product/${row.original._id}/edit`)}
           >
             Edit
           </Button>
           <Button 
+            className={classes.button}
             variant='contained' 
-            color='secondary' 
+            style={{backgroundColor: '#d92027'}}
             onClick={() => deleteProductHandler(row.original._id)}
           >
             Delete
@@ -113,23 +99,23 @@ function ProductList() {
         (
           <>
             <Grid item xs={12} sm={12} lg={12} style={{ margin: 0, width: '100%' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <Button variant='outlined' style={{ marginLeft: '40px' }} onClick={() => history.push('/')}>
-                    Go Back
-                  </Button>
-                </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 50px' }}>
+                <Button
+                  style={{ marginLeft: "40px" }}
+                  onClick={() => history.goBack()}
+                >
+                  <ArrowBackIcon style={{ marginRight: "5px" }} /> Return
+                </Button>
                 <h2>Products</h2>
-                <div>
-                  <Button
-                    variant='outlined'
-                    onClick={handleCreateProduct}
-                    color='primary'
-                    style={{ marginRight: '40px' }}
-                  >
-                    Create Product
-                  </Button>
-                </div>
+                <Button
+                  className={classes.button}
+                  style={{ marginRight: '40px' }}
+                  onClick={handleCreateProduct}
+                  variant='contained'
+                  color='secondary' 
+                >
+                  <NoteAddIcon style={{ marginRight: "5px", fill:'#fff' }} /> Create Product
+                </Button>
               </div>
             </Grid>
             <Grid item xs={12} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
@@ -143,3 +129,25 @@ function ProductList() {
 }
 
 export default ProductList
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    maxWidth: '100%',
+    margin: '0px',
+    padding: '15px',
+    marginBottom: '50px',
+  },
+  product: {
+    flexGrow: 1,
+  },
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  button: {
+    color:'#fff',
+    boxShadow: 'none',
+    fontWeight: 900,
+  }
+}))

@@ -4,7 +4,6 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Ratings from "../Ratings/Ratings";
-import PropTypes from "prop-types";
 import * as S from "./styled";
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from "react-router-dom";
@@ -55,14 +54,6 @@ const Product = ({ id, product, addToCartHandler }) => {
       </S.AddButon>
     </Card>
   );
-};
-
-Ratings.propTypes = {
-  rating: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  numReviews: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
 };
 
 export default Product;

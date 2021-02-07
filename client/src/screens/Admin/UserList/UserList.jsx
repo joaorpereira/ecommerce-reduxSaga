@@ -5,28 +5,11 @@ import { columns } from './columns'
 
 import Loading from '../../../components/Loading/Loading'
 import Button from '../../../components/Button/Button'
-import HighlightOffIcon from '@material-ui/icons/HighlightOff'
-import CheckCircle from '@material-ui/icons/CheckCircleOutline'
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 import { useHistory } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { userListAdminRequest, userDeleteAdminRequest } from '../../../store/modules/AdminUser/userAdminActions'
-
-const useStyles = makeStyles(() => ({
-  loading: {
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
-  container: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-}))
 
 function UserList() {
   const dispatch = useDispatch()
@@ -68,11 +51,11 @@ function UserList() {
       i.Cell = ({ row }) => <div>{row.original.email}</div>
     } else if (i.accessor === 'admin') {
       i.Cell = ({ row }) => (
-        <div>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
           {row.original.isAdmin === true ? (
-            <CheckCircle style={{ fill: '#4caf50' }} />
+            <CheckBoxIcon style={{ fill: '#4caf50' }} />
           ) : (
-            <HighlightOffIcon style={{ fill: '#f44336' }} />
+            <CheckBoxIcon style={{ fill: '#d92027' }} />
           )}
         </div>
       )
@@ -82,14 +65,16 @@ function UserList() {
           <Button
             variant='contained'
             color='primary'
+            className={classes.button}
             style={{ marginRight: '10px' }}
             onClick={() => history.push(`/admin/user/${row.original._id}/edit`)}
           >
             Edit
           </Button>
           <Button 
+            className={classes.button}
             variant='contained' 
-            color='secondary' 
+            style={{backgroundColor: '#d92027'}}
             onClick={() => deleteUserHandler(row.original._id)}
           >
             Delete
@@ -115,3 +100,24 @@ function UserList() {
 }
 
 export default UserList
+
+const useStyles = makeStyles(() => ({
+  loading: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  container: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  button: {
+    color:'#fff',
+    boxShadow: 'none',
+    fontWeight: 900,
+  }
+}))

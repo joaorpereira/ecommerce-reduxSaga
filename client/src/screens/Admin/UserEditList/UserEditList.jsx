@@ -7,6 +7,7 @@ import {
   Checkbox,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import * as S from './styled'
 
 import Loading from '../../../components/Loading/Loading'
 import Button from '../../../components/Button/Button'
@@ -29,7 +30,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2, 1, 2, 0),
+    color: '#fff',
+    boxShadow: 'none',
+    fontWeight: 900,
+  },
+  button: {
+    margin: theme.spacing(2, 0, 2, 1),
+    color: '#fff',
+    boxShadow: 'none',
+    fontWeight: 900,
   },
 }))
 
@@ -79,15 +89,6 @@ const UserEditList = () => {
       {loadingUpdate && <Loading/>}
       <div className={classes.paper}>
         <h2>Edit User</h2>
-        <Button
-          onClick={() => history.push('/admin/users')}
-          fullWidth
-          variant='contained'
-          color='primary'
-          className={classes.submit}
-        >
-          Go Back
-        </Button>
         <form className={classes.form} onSubmit={updateHandler}>
           <TextField
             variant='outlined'
@@ -112,9 +113,28 @@ const UserEditList = () => {
             control={<Checkbox checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} color='primary' />}
             label='Is Admin'
           />
-          <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
-            Update
-          </Button>
+          <S.Box>
+            <Button
+              onClick={() => history.push('/admin/users')}
+              size='large'
+              fullWidth
+              variant='contained'
+              color='secondary'
+              className={classes.submit}
+            >
+              Return
+            </Button>
+            <Button 
+              type='submit' 
+              size='large'
+              fullWidth 
+              variant='contained' 
+              color='primary' 
+              className={classes.button}
+            >
+              Update
+            </Button>
+          </S.Box>
         </form>
       </div>
     </Container>
