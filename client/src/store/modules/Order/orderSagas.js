@@ -20,7 +20,6 @@ function* createOrderRequest({payload}) {
 function* getOrderDetailsRequest({id}) {
     try {
       const { data } = yield call(axios.get, `/api/orders/${id}`)
-      console.log('SAGA',data)
       yield put(actions.getOrderDetailSuccess(data))
       toast.success('Detalhes da ordem requisitados com sucesso')
     } catch (error) {
@@ -29,7 +28,7 @@ function* getOrderDetailsRequest({id}) {
     }
 }
 
-function* OrderPayRequest({id, paymentResult}) {
+function* orderPayRequest({id, paymentResult}) {
   try {
     const response = yield call(axios.put, `/api/orders/${id}/pay`, paymentResult)
     yield put(actions.payOrderSuccess(response))
@@ -40,13 +39,24 @@ function* OrderPayRequest({id, paymentResult}) {
   }
 }
 
+function* orderDeliverRequest({id, order}) {
+  try {
+    const response = yield call(axios.put, `/api/orders/${id}/deliver`, order)
+    yield put(actions.deliverOrderSuccess(response))
+    toast.success('Produto foi entregue com sucesso')
+  } catch (error) {
+    toast.error('Falha ao entregar produto')
+    yield put(actions.deliverOrderFail(error))
+  }
+}
+
 function* orderListProfileRequest() {
   try {
     const {data} = yield call(axios.get, `/api/orders/myorders`)  
     yield put(actions.orderListProfileSuccess(data))
     toast.success('Ordens requisitadas com sucesso')
   } catch (error) {
-    toast.error('Falha ao requisitar as oders')
+    toast.error('Falha ao requisitar as ordens')
     yield put(actions.orderListProfileFail(error))
   }
 }
@@ -54,6 +64,7 @@ function* orderListProfileRequest() {
 export default all([
   takeLatest(types.ORDER_CREATE_REQUEST, createOrderRequest),
   takeLatest(types.ORDER_DETAILS_REQUEST, getOrderDetailsRequest),
-  takeLatest(types.ORDER_PAY_REQUEST, OrderPayRequest),
+  takeLatest(types.ORDER_PAY_REQUEST, orderPayRequest),
+  takeLatest(types.ORDER_DELIVER_REQUEST, orderDeliverRequest),
   takeLatest(types.ORDER_LIST_PROFILE_REQUEST, orderListProfileRequest)
 ])

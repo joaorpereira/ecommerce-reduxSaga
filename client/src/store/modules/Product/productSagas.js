@@ -61,12 +61,25 @@ function* updateProductAdminRequest({payload}) {
   }
 }
 
+function* reviewProductRequest({payload}) {
+  try {
+    const product = payload
+    const { data } = yield call(axios.post,`/api/products/${payload._id}/reviews`, product.review)
+    yield put(actions.reviewProductSuccess(data))
+    toast.success('Comentário adicionado com sucesso')
+  } catch (error) {
+    toast.error('Comnetário não foi adicionado')
+    yield put(actions.reviewProductFail(error))
+  }
+}
+
 export default all([
   takeLatest(types.PRODUCT_LIST_REQUEST, productsRequest),
   takeLatest(types.PRODUCT_ITEM_REQUEST, productRequest),
   takeLatest(types.PRODUCT_DELETE_REQUEST, productDeleteAdminRequest),
   takeLatest(types.PRODUCT_CREATE_REQUEST, createProductAdminRequest),
   takeLatest(types.PRODUCT_UPDATE_REQUEST, updateProductAdminRequest),
+  takeLatest(types.PRODUCT_REVIEW_REQUEST, reviewProductRequest),
 ])
 
 

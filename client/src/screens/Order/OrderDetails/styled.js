@@ -21,10 +21,12 @@ export const OrderContainer = styled.div`
 export const StyledTypography = styled(Typography)`
   letter-spacing: 3px;
   text-transform: uppercase;
+  font-weight: bold;
 `
 export const OrderTypography = styled(Typography)`
   text-transform: uppercase;
-  margin: -15px 0px 15px 5px;
+  margin: -15px 0px 15px 20px;
+  font-weight: bold;
 `
 
 export const StyledDivider = styled(Divider)`

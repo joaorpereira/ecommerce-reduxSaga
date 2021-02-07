@@ -83,8 +83,6 @@ const updateProduct = async (req, res) => {
   try {
     const { id: _id } = req.params
     const product = req.body
-    console.log(product)
-    console.log(_id)
 
     if (!mongoose.Types.ObjectId.isValid(_id)) {
       return res.status(404).send({ message: 'Product not found' })
@@ -97,4 +95,41 @@ const updateProduct = async (req, res) => {
   }
 }
 
-export { getAllProducts, getSingleProduct, deleteProduct, createProduct, updateProduct }
+// @desc Create new review product
+// @route POST /api/products/:id/reviews
+// @access Private
+const createProductReview = async (req, res) => {
+  try {
+    const {
+      rating, 
+      comment
+    } = req.body
+
+    const product = await Product.findById(req.params.id)
+
+    if(product){
+      const alreadyReviewed = product.reviews.find(r => r.user.toString() === req.user._id.toString())
+
+      if(alreadyReviewed) {
+        return res.status(400).json('Product already reviewed')
+      }
+
+      const review = {
+        name: req.user.name,
+        rating: Number(rating),
+        comment,
+        user: req.user._id
+      }
+
+      product.reviews.push(review)
+      product.numReviews = product.reviews.length
+      product.rating = product.reviews.reduce((acc, item) => (acc + item.rating), 0) / product.reviews.length
+      await product.save()
+      return res.status(201).json({message: 'Review added'})
+    } 
+  } catch (error) {
+    return res.status(404).send({ message: 'Product not found' })
+  }
+}
+
+export { getAllProducts, getSingleProduct, deleteProduct, createProduct, updateProduct, createProductReview }

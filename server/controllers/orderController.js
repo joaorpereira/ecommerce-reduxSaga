@@ -58,7 +58,7 @@ const getOrderById = async (req, res) => {
   }
 }
 
-// @desc Get order by Id
+// @desc Update order to paid
 // @route PUT /api/orders/:id/pay
 // @access Private
 const updateOrderToPay = async (req, res) => {
@@ -77,12 +77,36 @@ const updateOrderToPay = async (req, res) => {
       res.status(200).json(updatedOrder)
     } else {
       res.status(400).send({
-        message: 'Order not updated',
+        message: 'Order paid not updated',
       })
     }
   } catch (error) {
     res.status(400).send({
-      message: 'Order not updated',
+      message: 'Order paid not updated',
+    })
+  }
+}
+
+// @desc Update order to delivered
+// @route PUT /api/orders/:id/deliver
+// @access Private/Admin
+const updateOrderToDelivered = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id)
+    if (order) {
+      order.isDelivered = true
+      order.deliveredAt = Date.now()
+
+      const deliveredOrder = await order.save()
+      res.status(200).json(deliveredOrder)
+    } else {
+      res.status(400).send({
+        message: 'Order delivered not updated',
+      })
+    }
+  } catch (error) {
+    res.status(404).send({
+      message: 'Order delivered not updated',
     })
   }
 }
@@ -115,4 +139,4 @@ const getAllOrders = async (req, res) => {
   }
 }
 
-export { createOrder, getOrderById, updateOrderToPay, getMyOrders, getAllOrders }
+export { createOrder, getOrderById, updateOrderToPay, updateOrderToDelivered, getMyOrders, getAllOrders }

@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import * as S from './styled'
 import { PayPalButton } from 'react-paypal-button-v2'
 import Loading from '../../../components/Loading/Loading'
+import Button from '../../../components/Button/Button'
 
 const useStyles = makeStyles({
   root: {
@@ -12,10 +13,12 @@ const useStyles = makeStyles({
   },
 })
 
-const OrderSummary = ({ order, sdkReady, loadingPay, successPaymentHandler }) => {
+const OrderSummary = ({ order, sdkReady, loadingPay, user, deliverHandler, successPaymentHandler }) => {
   const classes = useStyles()
 
-  const { totalPrice, shippingPrice, taxPrice, orderItems } = order
+  const { totalPrice, shippingPrice, taxPrice, orderItems, isPaid, isDelivered } = order
+
+  console.log(user)
 
   return (
     <Card className={classes.root} variant='outlined'>
@@ -24,31 +27,41 @@ const OrderSummary = ({ order, sdkReady, loadingPay, successPaymentHandler }) =>
       </S.StyledTypography>
       <S.StyledCardContent>
         <S.StyledDivider />
-        <Typography variant='body1'>
+        <Typography>
           <strong>Items:</strong>
           <span>{orderItems.length}</span>
         </Typography>
         <S.StyledDivider />
-        <Typography variant='body1'>
+        <Typography>
           <strong>Shipping:</strong>
           <span>$ {shippingPrice}</span>
         </Typography>
         <S.StyledDivider />
-        <Typography variant='body1'>
+        <Typography>
           <strong>Tax:</strong>
           <span>$ {taxPrice}</span>
         </Typography>
         <S.StyledDivider />
-        <Typography variant='body1'>
+        <Typography>
           <strong>Total:</strong>
           <span>$ {totalPrice}</span>
         </Typography>
         <S.StyledDivider />
-        {!order.isPaid && (
+        {!isPaid && (
           <div style={{ marginTop: '10px' }}>
             {loadingPay && <Loading/>}
-            {sdkReady && <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler} />}
+            {sdkReady && <PayPalButton amount={totalPrice} onSuccess={successPaymentHandler} />}
           </div>
+        )}
+        {user.isAdmin && isPaid && !isDelivered && (
+          <Button 
+            onClick={deliverHandler} 
+            fullWidth 
+            variant='contained' 
+            color='primary' 
+          >
+            Mark as Delivered
+          </Button>          
         )}
       </S.StyledCardContent>
     </Card>

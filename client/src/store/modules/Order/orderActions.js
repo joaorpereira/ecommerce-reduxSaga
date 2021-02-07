@@ -28,7 +28,6 @@ export function getOrderDetailRequest(id) {
   }
 }
 export function getOrderDetailSuccess(payload) {
-  console.log('SUCCESS_ACTION', payload)
   return {
     type: types.ORDER_DETAILS_SUCCESS,
     payload,
@@ -61,6 +60,27 @@ export function payOrderFail(payload) {
       payload,
     }
   }
+
+  //@deliver_ORDER
+export function deliverOrderRequest(id, order) {
+  return {
+    type: types.ORDER_DELIVER_REQUEST,
+    id, 
+    order,
+  }
+}
+export function deliverOrderSuccess(payload) {
+  return {
+    type: types.ORDER_DELIVER_SUCCESS,
+    payload,
+  }
+}
+export function deliverOrderFail(payload) {
+  return {
+    type: types.ORDER_DELIVER_FAIL,
+    payload,
+  }
+}
 
     //@GET_MY_ORDERS
 export function orderListProfileRequest(user) {

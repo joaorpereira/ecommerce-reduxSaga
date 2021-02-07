@@ -20,9 +20,14 @@ const Products = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [ quantity, setQuantity ] = useState(1);
+  const [ rating, setRating ] = useState(0);
+  const [ comment, setComment ] = useState('');
+
   const { product, loading } = useSelector((state) => state.product);
+  const review = useSelector((state) => state.review);
   const { isLoggedIn } = useSelector((state) => state.user);
-  const [quantity, setQuantity] = useState(1);
+
 
   let { id } = useParams();
 

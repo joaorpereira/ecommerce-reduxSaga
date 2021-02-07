@@ -52,7 +52,6 @@ export function deleteProductRequest(id) {
 }
 
 export function deleteProductSuccess() {
-    console.log('success')
     return {
         type: types.PRODUCT_DELETE_SUCCESS,
     }
@@ -73,7 +72,6 @@ export function createProductRequest() {
 }
   
 export function createProductSuccess(payload) {
-    console.log('success_product', payload)
     return {
         type: types.PRODUCT_CREATE_SUCCESS,
         payload,
@@ -96,7 +94,6 @@ export function createProductReset(payload) {
   
   // @UPDATE  Product
 export function updateProductRequest(payload) {
-    console.log('request',payload)
     return {
         type: types.PRODUCT_UPDATE_REQUEST,
         payload,
@@ -104,7 +101,6 @@ export function updateProductRequest(payload) {
 }
   
 export function updateProductSuccess(payload) {
-    console.log('success',payload)
     return {
         type: types.PRODUCT_UPDATE_SUCCESS,
         payload,
@@ -114,6 +110,28 @@ export function updateProductSuccess(payload) {
 export function updateProductFail(payload) {
     return {
         type: types.PRODUCT_UPDATE_FAIL,
+        payload,
+    }
+}
+  
+  // @CREATE  Product Review
+  export function reviewProductRequest(payload) {
+    return {
+        type: types.PRODUCT_REVIEW_REQUEST,
+        payload,
+    }
+}
+  
+export function reviewProductSuccess(payload) {
+    return {
+        type: types.PRODUCT_REVIEW_SUCCESS,
+        payload,
+    }
+}
+
+export function reviewProductFail(payload) {
+    return {
+        type: types.PRODUCT_REVIEW_FAIL,
         payload,
     }
 }

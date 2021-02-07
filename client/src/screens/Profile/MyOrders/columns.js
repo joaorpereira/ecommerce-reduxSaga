@@ -1,14 +1,8 @@
 
 export const columns = [
     {
-        Header: 'Id',
+        Header: 'Position',
         accessor: 'id',
-        sortType: 'basic',
-        show: true
-    },
-    {
-        Header: 'Date',
-        accessor: 'date',
         sortType: 'basic',
         show: true
     },
@@ -19,14 +13,20 @@ export const columns = [
         show: true
     },
     {
-        Header: 'Paid',
-        accessor: 'paid',
+        Header: 'Created',
+        accessor: 'date',
         sortType: 'basic',
         show: true
     },
     {
-        Header: 'Hour',
+        Header: 'Updated',
         accessor: 'hour',
+        sortType: 'basic',
+        show: true
+    },
+    {
+        Header: 'Paid',
+        accessor: 'paid',
         sortType: 'basic',
         show: true
     },

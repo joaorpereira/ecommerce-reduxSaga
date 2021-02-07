@@ -4,7 +4,9 @@ const initialState = {
   order: {
     createdAt: null,
     isDelivered: null,
+    deliveredAt: null,
     isPaid: null,
+    paidAt: null,
     orderItems: [],
     paymentMethod: '',
     shippingAddress: {},
@@ -33,7 +35,9 @@ export const orderCreateReducer = (state = initialState, action) => {
         const {
           createdAt,
           isDelivered,
+          deliveredAt,
           isPaid,
+          paidAt,
           orderItems, 
           shippingAddress, 
           paymentMethod, 
@@ -48,14 +52,16 @@ export const orderCreateReducer = (state = initialState, action) => {
         const newState = { ...state }
         newState.order.createdAt = createdAt        
         newState.order.isDelivered = isDelivered
+        newState.order.deliveredAt = deliveredAt
         newState.order.isPaid = isPaid
+        newState.order.paidAt = paidAt
         newState.order.orderItems = orderItems
         newState.order.paymentMethod = paymentMethod
         newState.order.shippingAddress = shippingAddress
         newState.order.shippingPrice = shippingPrice
         newState.order.taxPrice = taxPrice
         newState.order.totalPrice = totalPrice
-        newState.order.updatedAt =  updatedAt
+        newState.order.updatedAt = updatedAt
         newState.order._id = _id
         newState.order.user = user
         newState.loading = false
@@ -88,7 +94,9 @@ export const orderGetDetailsReducer = (state = initialState, action) => {
         const {
           createdAt,
           isDelivered,
+          deliveredAt,
           isPaid,
+          paidAt,
           orderItems, 
           shippingAddress, 
           paymentMethod, 
@@ -103,7 +111,9 @@ export const orderGetDetailsReducer = (state = initialState, action) => {
         const newState = { ...state }
         newState.order.createdAt = createdAt        
         newState.order.isDelivered = isDelivered
+        newState.order.deliveredAt = deliveredAt
         newState.order.isPaid = isPaid
+        newState.order.paidAt = paidAt
         newState.order.orderItems = orderItems
         newState.order.paymentMethod = paymentMethod
         newState.order.shippingAddress = shippingAddress
@@ -151,6 +161,42 @@ export const orderPayReducer = (state = initialState, action) => {
       newState.success = false
       return newState
     }
+
+    case types.ORDER_PAY_RESET:
+      const newState = initialState
+      return newState
+
+    default:
+      return state
+  }
+}
+
+export const orderDeliverReducer = (state = initialState, action) => {
+  switch (action.type) {
+
+    case types.ORDER_DELIVER_REQUEST: {
+      const newState = { ...state }
+      newState.loading = true
+      return newState
+    }
+
+    case types.ORDER_DELIVER_SUCCESS: {
+      const newState = { ...state }
+      newState.loading = false
+      newState.success = true
+      return newState
+    }
+
+    case types.ORDER_DELIVER_FAIL: {
+      const newState = initialState
+      newState.loading = false
+      newState.success = false
+      return newState
+    }
+
+    case types.ORDER_DELIVER_RESET:
+      const newState = initialState
+      return newState
 
     default:
       return state

@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getOrderDetailRequest,
   payOrderRequest,
+  deliverOrderRequest
 } from "../../store/modules/Order/orderActions";
-import { ORDER_PAY_RESET } from "../../store/modules/Order/orderTypes";
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from "../../store/modules/Order/orderTypes";
 import OrderSummary from "./OrderSummary/OrderSummary";
 import OrderDetails from "./OrderDetails/OrderDetails";
 import axios from "axios";
@@ -37,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Order = () => {
   const classes = useStyles();
-
   let { id } = useParams();
   const dispatch = useDispatch();
 
@@ -50,6 +50,9 @@ const Order = () => {
 
   const orderPay = useSelector((state) => state.orderPay);
   const { success: successPay, loading: loadingPay } = orderPay;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { success: successDeliver } = orderDeliver;
 
   useEffect(() => {
     const addPaypalScript = async () => {
@@ -64,8 +67,9 @@ const Order = () => {
       document.body.appendChild(script);
     };
 
-    if (!order || order._id !== id || successPay) {
+    if (!order || order._id !== id || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetailRequest(id));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -74,11 +78,15 @@ const Order = () => {
         setSdkReady(true);
       }
     }
-  }, [id, order, successPay, dispatch]);
+  }, [id, order, successPay, successDeliver, dispatch]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrderRequest(id, paymentResult));
     dispatch(getOrderDetailRequest(id));
+  };
+
+  const deliverHandler = () => {
+    dispatch(deliverOrderRequest(id, order));
   };
 
   return (
@@ -92,6 +100,8 @@ const Order = () => {
             order={order}
             loadingPay={loadingPay}
             sdkReady={sdkReady}
+            user={user}
+            deliverHandler={deliverHandler}
             successPaymentHandler={successPaymentHandler}
           />
         </Grid>

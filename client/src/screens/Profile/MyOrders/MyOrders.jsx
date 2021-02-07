@@ -23,13 +23,9 @@ const MyOrders = ({ loading, orders }) => {
     return format(new Date(date), 'dd/MM/yyyy')
   }
 
-  const formatHour = (hour) => {
-    return format(new Date(hour), "HH:mm'h")
-  }
-
   columns.forEach((i) => {
     if (i.accessor === 'id') {
-      i.Cell = ({ row }) => <div>{row.original._id}</div>
+      i.Cell = ({ row }) => <div>{row.original._id }</div>
     } else if (i.accessor === 'date') {
       i.Cell = ({ row }) => <div style={{display: 'flex', justifyContent: 'center'}}>{formatDate(row.original.createdAt)}</div>
     } else if (i.accessor === 'total') {
@@ -45,7 +41,7 @@ const MyOrders = ({ loading, orders }) => {
         </div>
       )
     } else if (i.accessor === 'hour') {
-      i.Cell = ({ row }) => <div style={{display: 'flex', justifyContent: 'center'}}>{formatHour(row.original.updatedAt)}</div>
+      i.Cell = ({ row }) => <div style={{display: 'flex', justifyContent: 'center'}}>{formatDate(row.original.updatedAt)}</div>
     } else if (i.accessor === 'delivered') {
       i.Cell = ({ row }) => (
         <div style={{display: 'flex', justifyContent: 'center'}}>

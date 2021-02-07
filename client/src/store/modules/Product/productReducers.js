@@ -114,8 +114,28 @@ export const updateProductReducer = (state = initialState, action) => {
     }
     case types.PRODUCT_UPDATE_SUCCESS: {
       const newState = { ...state }
-      const { name, email, password, brand, category, countInStock, description, image, price } = action.payload
-      newState.product = { ...state, name, email, password, brand, category, countInStock, description, image, price}
+      const { 
+        name, 
+        email, password, 
+        brand, category, 
+        countInStock, 
+        description, 
+        image, 
+        price 
+      } = action.payload
+
+      newState.product = { 
+        ...state, 
+        name, 
+        email, 
+        password, 
+        brand, 
+        category, 
+        countInStock, 
+        description, 
+        image, 
+        price
+      }
       newState.loading = false
       newState.success = true
       return newState
@@ -129,6 +149,35 @@ export const updateProductReducer = (state = initialState, action) => {
     case types.PRODUCT_UPDATE_RESET: {
       const newState = { ...initialState }
       newState.product = {}
+      return newState
+    }
+    default:
+      return state
+  }
+}
+
+export const reviewProductReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case types.PRODUCT_REVIEW_REQUEST: {
+      const newState = { ...state }
+      newState.loading = true
+      return newState
+    }
+    case types.PRODUCT_REVIEW_SUCCESS: {
+      const newState = { ...state }
+      newState.loading = false
+      newState.success = true
+      return newState
+    }
+    case types.PRODUCT_REVIEW_FAIL: {
+      const newState = { ...initialState }
+      newState.loading = false
+      newState.success = false
+      return newState
+    }
+    case types.PRODUCT_REVIEW_RESET: {
+      const newState = { ...initialState }
+      newState.product = { reviews: [] }
       return newState
     }
     default:

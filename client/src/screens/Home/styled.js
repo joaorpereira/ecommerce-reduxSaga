@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Chip } from "@material-ui/core";
 
 export const StyledWrap = styled.div`
   display: flex;
