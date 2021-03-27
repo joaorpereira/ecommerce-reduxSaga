@@ -5,16 +5,15 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Header from '../components/Header/Header'
 import 'react-toastify/dist/ReactToastify.css'
 import '../theme/styles.css'
-import { MainContent } from './styled'
 
 const Template = () => {
   return (
     <>
       <CssBaseline />
       <Header />
-      <MainContent style={{ minHeight: '80%' }}>
+      <main style={{ minHeight: '80%' }}>
         <Routes />
-      </MainContent>
+      </main>
       <ToastContainer
         progressClassName='toastProgress'
         bodyClassName='toastBody'
