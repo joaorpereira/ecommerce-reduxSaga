@@ -10,7 +10,7 @@ import Button from '../../components/Button/Button'
 const Shipping = () => {
   const classes = useStyles()
 
-  const cart = useSelector((state) => state.cart)
+  const cart = useSelector(state => state.cart)
   const { shippingAddress } = cart
   const [address, setAddress] = useState(shippingAddress.address)
   const [city, setCity] = useState(shippingAddress.city)
@@ -20,7 +20,7 @@ const Shipping = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const shippingHandler = (e) => {
+  const shippingHandler = e => {
     e.preventDefault()
     dispatch(saveShippingAddress({ address, city, postalCode, country }))
     history.push('/payment')
@@ -42,7 +42,7 @@ const Shipping = () => {
                 label='Address'
                 autoFocus
                 value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                onChange={e => setAddress(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -51,9 +51,9 @@ const Shipping = () => {
                 margin='normal'
                 required
                 fullWidth
-                label='City'                
+                label='City'
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
+                onChange={e => setCity(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -65,7 +65,7 @@ const Shipping = () => {
                 label='Postal Code'
                 type='text'
                 value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
+                onChange={e => setPostalCode(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -77,11 +77,18 @@ const Shipping = () => {
                 label='Country'
                 type='text'
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
+                onChange={e => setCountry(e.target.value)}
               />
             </Grid>
           </Grid>
-          <Button type='submit' fullWidth variant='contained' size='big' color='primary' className={classes.submit}>
+          <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            size='medium'
+            color='primary'
+            className={classes.submit}
+          >
             Continue
           </Button>
         </form>
@@ -92,7 +99,7 @@ const Shipping = () => {
 
 export default Shipping
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(2),
     display: 'flex',
@@ -109,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(2, 0, 2),
     fontWeight: 900,
-    boxShadow: "none",
+    boxShadow: 'none',
     color: '#fff',
   },
   root: {

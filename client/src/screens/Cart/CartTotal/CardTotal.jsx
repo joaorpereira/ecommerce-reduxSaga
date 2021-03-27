@@ -29,7 +29,7 @@ const CartTotal = ({ cartItems, checkOutHandler }) => {
           className={classes.button}
           fullWidth
           variant="contained"
-          size="big"
+          size="medium"
           color="secondary"
           onClick={checkOutHandler}
           disabled={cartItems.length === 0}

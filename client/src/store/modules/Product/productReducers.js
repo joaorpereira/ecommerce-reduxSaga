@@ -167,7 +167,7 @@ export const reviewProductReducer = (state = initialState, action) => {
     }
     case types.PRODUCT_REVIEW_SUCCESS: {
       const newState = { ...state }
-      const review = action.payload
+      const { review } = action.payload
       newState.product.reviews = [...newState.product.reviews, { review }]
       newState.loading = false
       newState.success = true

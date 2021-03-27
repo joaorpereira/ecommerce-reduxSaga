@@ -43,8 +43,8 @@ const OrderSummary = ({ cartItems, placeOrderHandler, orderSummary }) => {
           fullWidth
           variant='contained'
           color='secondary'
-          size='big'
-          disable={cartItems === 0}
+          size='medium'
+          disabled={cartItems === 0}
           onClick={placeOrderHandler}
         >
           Place Order

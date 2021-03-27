@@ -86,7 +86,7 @@ function Reviews({
             margin='dense'
             multiline
             rows={4}
-            maxRows={6}
+            rowsMax={6}
             fullWidth
             label='Comment'
             value={comment}
@@ -98,8 +98,8 @@ function Reviews({
             variant='contained'
             color='secondary'
             fullWidth
-            size='big'
-            disable={rating?.length > 0 && comment?.length > 0}
+            size='medium'
+            disabled={(rating && rating.length) > 0 && (comment && comment.length) > 0}
             onClick={addReviewHandler}
           >
             Add Review

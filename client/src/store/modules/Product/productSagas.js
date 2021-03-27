@@ -26,7 +26,7 @@ function* productRequest({ id }) {
   }
 }
 
-function* productDeleteAdminRequest({id}) {
+function* productDeleteAdminRequest({ id }) {
   try {
     yield call(axios.delete, `/api/products/${id}`)
     yield put(actions.deleteProductSuccess())
@@ -36,7 +36,7 @@ function* productDeleteAdminRequest({id}) {
     yield put(actions.deleteProductFail(error))
   }
 }
- 
+
 function* createProductAdminRequest() {
   try {
     const { data } = yield call(axios.post, '/api/products', {})
@@ -47,11 +47,15 @@ function* createProductAdminRequest() {
     yield put(actions.createProductFail(error))
   }
 }
-  
-function* updateProductAdminRequest({payload}) {
+
+function* updateProductAdminRequest({ payload }) {
   try {
     const product = payload
-    const { data } = yield call(axios.put,`/api/products/${payload._id}`, product)
+    const { data } = yield call(
+      axios.put,
+      `/api/products/${payload._id}`,
+      product
+    )
     yield put(actions.updateProductSuccess(data))
     toast.success('Produto atualizado com sucesso')
   } catch (error) {
@@ -60,10 +64,14 @@ function* updateProductAdminRequest({payload}) {
   }
 }
 
-function* reviewProductRequest({payload}) {
+function* reviewProductRequest({ payload }) {
   try {
-    yield call(axios.post,`/api/products/${payload.id}/reviews`, payload.review)
-    yield put(actions.reviewProductSuccess())
+    yield call(
+      axios.post,
+      `/api/products/${payload.id}/reviews`,
+      payload.review
+    )
+    yield put(actions.reviewProductSuccess(payload))
     toast.success('Comentário adicionado com sucesso')
   } catch (error) {
     toast.error('Comentário não foi adicionado')
@@ -79,5 +87,3 @@ export default all([
   takeLatest(types.PRODUCT_UPDATE_REQUEST, updateProductAdminRequest),
   takeLatest(types.PRODUCT_REVIEW_REQUEST, reviewProductRequest),
 ])
-
-

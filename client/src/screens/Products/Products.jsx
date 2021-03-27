@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { Grid } from '@material-ui/core'
 import * as S from './styled'
 
@@ -30,14 +30,14 @@ const Products = () => {
   const [comment, setComment] = useState('')
 
   const { product, loading } = useSelector(state => state.product)
-  const reviewProduct = useSelector(state => state.reviewProduct)
+  const { success } = useSelector(state => state.reviewProduct)
   const { isLoggedIn } = useSelector(state => state.user)
 
   let { id } = useParams()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(productRequest(id))
-  }, [id, dispatch])
+  }, [id, dispatch, success])
 
   const addToCartHandler = () => {
     if (isLoggedIn) {

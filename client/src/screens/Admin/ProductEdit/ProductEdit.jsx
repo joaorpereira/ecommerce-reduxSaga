@@ -13,7 +13,7 @@ import { productRequest } from '../../../store/modules/Product/productActions'
 import { PRODUCT_UPDATE_RESET } from '../../../store/modules/Product/productTypes'
 import { updateProductRequest } from '../../../store/modules/Product/productActions'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(5),
     display: 'flex',
@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
     width: 725,
     display: 'flex',
     justifyContent: 'center',
-    marginTop: '20px'
+    marginTop: '20px',
   },
   submit: {
-    color:'#fff',
+    color: '#fff',
     boxShadow: 'none',
     fontWeight: 900,
-  }
+  },
 }))
 
 const ProductEdit = () => {
@@ -47,9 +47,11 @@ const ProductEdit = () => {
   const [description, setDescription] = useState('')
   const [uploading, setUploading] = useState(false)
 
-  const {loading, product} = useSelector((state) => state.product)
+  const { loading, product } = useSelector(state => state.product)
 
-  const { loading: loadingUpdate, success: successUpdate } = useSelector((state) => state.updateProduct)
+  const { loading: loadingUpdate, success: successUpdate } = useSelector(
+    state => state.updateProduct
+  )
 
   let { id } = useParams()
   const productId = id
@@ -73,7 +75,7 @@ const ProductEdit = () => {
     }
   }, [dispatch, product, productId, successUpdate, history])
 
-  const updateHandler = (e) => {
+  const updateHandler = e => {
     e.preventDefault()
     dispatch(
       updateProductRequest({
@@ -89,7 +91,7 @@ const ProductEdit = () => {
     )
   }
 
-  const uploadImageHandler = async (e) => {
+  const uploadImageHandler = async e => {
     const file = e.target.files[0]
     const formData = new FormData()
     formData.append('image', file)
@@ -105,16 +107,15 @@ const ProductEdit = () => {
       setImage(data)
       setUploading(false)
     } catch (error) {
-      console.log(error.message)
       setUploading(false)
     }
   }
   return (
     <Container component='main' maxWidth='sm'>
       <CssBaseline />
-      {loading && <Loading/>}
-      {loadingUpdate && <Loading/>}
-      {uploading && <Loading/>}
+      {loading && <Loading />}
+      {loadingUpdate && <Loading />}
+      {uploading && <Loading />}
       <div className={classes.paper}>
         <h2>Edit Product</h2>
         <form className={classes.form} onSubmit={updateHandler}>
@@ -128,7 +129,7 @@ const ProductEdit = () => {
                 label='Name'
                 autoFocus
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={e => setName(e.target.value)}
               />
             </Grid>
             <Grid item xs={6} md={3} lg={3}>
@@ -139,7 +140,7 @@ const ProductEdit = () => {
                 fullWidth
                 label='Price'
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={e => setPrice(e.target.value)}
               />
             </Grid>
             <Grid item xs={6} md={3} lg={3}>
@@ -150,7 +151,7 @@ const ProductEdit = () => {
                 fullWidth
                 label='Count In Stock'
                 value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
+                onChange={e => setCountInStock(e.target.value)}
               />
             </Grid>
             <Grid item xs={6} md={6} lg={6}>
@@ -161,7 +162,7 @@ const ProductEdit = () => {
                 fullWidth
                 label='Brand'
                 value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                onChange={e => setBrand(e.target.value)}
               />
             </Grid>
             <Grid item xs={6} md={6} lg={6}>
@@ -172,7 +173,7 @@ const ProductEdit = () => {
                 fullWidth
                 label='Category'
                 value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={e => setCategory(e.target.value)}
               />
             </Grid>
             <Grid item xs={6} md={6} lg={6}>
@@ -183,7 +184,7 @@ const ProductEdit = () => {
                 fullWidth
                 label='Image URL'
                 value={image}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={e => setImage(e.target.value)}
               />
             </Grid>
             <Grid item xs={6} md={6} lg={6}>
@@ -208,7 +209,7 @@ const ProductEdit = () => {
                 rows={4}
                 label='Description'
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={e => setDescription(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
@@ -216,7 +217,7 @@ const ProductEdit = () => {
                 onClick={() => history.push('/admin/products')}
                 fullWidth
                 type='large'
-                color='secondary' 
+                color='secondary'
                 variant='contained'
                 className={classes.submit}
               >
@@ -224,12 +225,12 @@ const ProductEdit = () => {
               </Button>
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
-              <Button 
-                type='submit' 
-                fullWidth 
-                variant='contained' 
+              <Button
+                type='submit'
+                fullWidth
+                variant='contained'
                 size='large'
-                color='primary' 
+                color='primary'
                 className={classes.submit}
               >
                 Update
