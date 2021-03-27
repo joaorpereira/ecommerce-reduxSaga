@@ -86,7 +86,7 @@ function Reviews({
             margin='dense'
             multiline
             rows={4}
-            maxRows={6}
+            rowsMax={6}
             fullWidth
             label='Comment'
             value={comment}
