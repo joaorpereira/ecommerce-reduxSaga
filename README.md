@@ -113,18 +113,20 @@ As seguintes tecnologias/ferramentas foram utilizadas:
 #->No terminal:
 
 # Clonar repositório:
-$ git clone https://github.com/abner-starkasty/restaurante-padre-cicero
+$ git clone https://github.com/joaorpereira/ecommerce-reduxSaga.git
 
 # Entrar no diretório desejado:
--> $ cd frontend
--> $ cd backend
+-> $ cd client
+-> $ cd server
 
 # Instalar dependências
-$ npm install
+$ npm install  # No root
+$ npm install  # No client
 
 # Iniciar o projeto
-$ npm start    # No Frontend
-$ npm start    # No Backend
+$ npm run dev  # No root
+$ npm start    # No client
+$ npm start    # No server
 
 # Após carregar o projeto automaticamente irá abrir uma guia no navegador padrão.
 
