@@ -10,9 +10,9 @@ function* orderListAdminRequest() {
   try {
     const { data } = yield call(axios.get, '/api/orders')
     yield put(actions.orderListAdminSuccess(data))
-    toast.success('Lista de usuários obtida com sucesso')
+    toast.success('Lista de ordens obtidas com sucesso')
   } catch (error) {
-    toast.error('Lista de usuários não foi encontrada')
+    toast.error('Lista de ordens não foi encontrada')
     yield put(actions.orderListAdminFail(error))
   }
 }

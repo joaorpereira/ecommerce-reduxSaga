@@ -28,8 +28,6 @@ function OrderDetails({ order, id, user}) {
     return format(new Date(date), 'dd/MM/yyyy')
   }
 
-  console.log(order)
-
   return (
     <>
     { user && order && 

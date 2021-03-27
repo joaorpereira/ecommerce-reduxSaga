@@ -93,13 +93,13 @@ export const userDetailReducer = (state = initialState, action) => {
 export const userUpdateReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case types.USER_DETAILS_REQUEST: {
+    case types.USER_UPDATE_PROFILE_REQUEST: {
       const newState = { ...state }
       newState.loading = true
       newState.success = false
       return newState
     }
-    case types.USER_DETAILS_SUCCESS: {
+    case types.USER_UPDATE_PROFILE_SUCCESS: {
       const newState = { ...state }
       const { name, email, password } = action.payload
       newState.user = { ...state, name, email, password }
@@ -107,7 +107,7 @@ export const userUpdateReducer = (state = initialState, action) => {
       newState.success = true            
       return newState
     }
-    case types.USER_DETAILS_FAIL: {
+    case types.USER_UPDATE_PROFILE_FAIL: {
       const newState = { ...initialState }
       return newState
     }

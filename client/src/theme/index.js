@@ -3,6 +3,9 @@ import palette from './palette'
 
 const theme = createMuiTheme({
   palette,
+  typography: {
+    fontFamily: ['Open Sans', 'Roboto', 'sans-serif'].join(','),
+  },
 })
 
 export default theme

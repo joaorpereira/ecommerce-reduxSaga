@@ -40,7 +40,6 @@ function* productDeleteAdminRequest({id}) {
 function* createProductAdminRequest() {
   try {
     const { data } = yield call(axios.post, '/api/products', {})
-    console.log('saga', data)
     yield put(actions.createProductSuccess(data))
     toast.success('O produto foi criado com sucesso')
   } catch (error) {
@@ -63,12 +62,11 @@ function* updateProductAdminRequest({payload}) {
 
 function* reviewProductRequest({payload}) {
   try {
-    const product = payload
-    const { data } = yield call(axios.post,`/api/products/${payload._id}/reviews`, product.review)
-    yield put(actions.reviewProductSuccess(data))
+    yield call(axios.post,`/api/products/${payload.id}/reviews`, payload.review)
+    yield put(actions.reviewProductSuccess())
     toast.success('Comentário adicionado com sucesso')
   } catch (error) {
-    toast.error('Comnetário não foi adicionado')
+    toast.error('Comentário não foi adicionado')
     yield put(actions.reviewProductFail(error))
   }
 }

@@ -73,7 +73,7 @@ const Header = () => {
           {isLoggedIn ? (
             <>
               <Modal logoutHandler={logoutHandler} userInfo={user} />
-              <Modal admin logoutHandler={logoutHandler} userInfo={user} />
+              {user.isAdmin ? <Modal admin logoutHandler={logoutHandler} userInfo={user} /> : null}
             </>
           ) : (
             <IconButton onClick={() => history.push("/login")} color="inherit">

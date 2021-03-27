@@ -6,14 +6,12 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.56",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "axios": "^0.21.0",
     "history": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-material-ui-carousel": "^2.2.1",
     "react-paypal-button-v2": "^2.6.2",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
@@ -24,9 +22,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.3",
-    "redux-thunk": "^2.3.0",
-    "styled-components": "^5.2.1",
-    "web-vitals": "^0.2.4"
+    "styled-components": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -53,7 +49,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.17.0",
     "optionator": "^0.9.1"
   }
 }

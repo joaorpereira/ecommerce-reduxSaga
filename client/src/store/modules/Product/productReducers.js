@@ -76,7 +76,7 @@ export const deleteProductReducer = (state = initialState, action) => {
       return state
   }
 }
- 
+
 export const createProductReducer = (state = {}, action) => {
   switch (action.type) {
     case types.PRODUCT_CREATE_REQUEST: {
@@ -104,7 +104,7 @@ export const createProductReducer = (state = {}, action) => {
       return state
   }
 }
-  
+
 export const updateProductReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.PRODUCT_UPDATE_REQUEST: {
@@ -114,27 +114,29 @@ export const updateProductReducer = (state = initialState, action) => {
     }
     case types.PRODUCT_UPDATE_SUCCESS: {
       const newState = { ...state }
-      const { 
-        name, 
-        email, password, 
-        brand, category, 
-        countInStock, 
-        description, 
-        image, 
-        price 
+      const {
+        name,
+        email,
+        password,
+        brand,
+        category,
+        countInStock,
+        description,
+        image,
+        price,
       } = action.payload
 
-      newState.product = { 
-        ...state, 
-        name, 
-        email, 
-        password, 
-        brand, 
-        category, 
-        countInStock, 
-        description, 
-        image, 
-        price
+      newState.product = {
+        ...state,
+        name,
+        email,
+        password,
+        brand,
+        category,
+        countInStock,
+        description,
+        image,
+        price,
       }
       newState.loading = false
       newState.success = true
@@ -165,6 +167,8 @@ export const reviewProductReducer = (state = initialState, action) => {
     }
     case types.PRODUCT_REVIEW_SUCCESS: {
       const newState = { ...state }
+      const review = action.payload
+      newState.product.reviews = [...newState.product.reviews, { review }]
       newState.loading = false
       newState.success = true
       return newState

@@ -88,7 +88,11 @@ const updateProduct = async (req, res) => {
       return res.status(404).send({ message: 'Product not found' })
     }
 
-    const updatedProduct = await Product.findByIdAndUpdate(_id, { ...product, _id }, { new: true })
+    const updatedProduct = await Product.findByIdAndUpdate(
+      _id,
+      { ...product, _id },
+      { new: true }
+    )
     return res.status(200).json(updatedProduct)
   } catch (error) {
     res.status(400).send({ message: 'Error updating product' })
@@ -100,36 +104,43 @@ const updateProduct = async (req, res) => {
 // @access Private
 const createProductReview = async (req, res) => {
   try {
-    const {
-      rating, 
-      comment
-    } = req.body
-
+    const review = req.body
     const product = await Product.findById(req.params.id)
 
-    if(product){
-      const alreadyReviewed = product.reviews.find(r => r.user.toString() === req.user._id.toString())
+    if (product) {
+      const alreadyReviewed = product.reviews.find(
+        r => r.user.toString() === req.user._id.toString()
+      )
 
-      if(alreadyReviewed) {
+      if (alreadyReviewed) {
         return res.status(400).json('Product already reviewed')
       }
 
-      const review = {
+      const newReview = {
         name: req.user.name,
-        rating: Number(rating),
-        comment,
-        user: req.user._id
+        rating: Number(review.rating),
+        comment: review.comment,
+        user: req.user._id,
       }
 
-      product.reviews.push(review)
+      product.reviews.push(newReview)
       product.numReviews = product.reviews.length
-      product.rating = product.reviews.reduce((acc, item) => (acc + item.rating), 0) / product.reviews.length
+      product.rating =
+        product.reviews.reduce((acc, item) => acc + item.rating, 0) /
+        product.reviews.length
       await product.save()
-      return res.status(201).json({message: 'Review added'})
-    } 
+      return res.status(201).json({ message: 'Review added' })
+    }
   } catch (error) {
     return res.status(404).send({ message: 'Product not found' })
   }
 }
 
-export { getAllProducts, getSingleProduct, deleteProduct, createProduct, updateProduct, createProductReview }
+export {
+  getAllProducts,
+  getSingleProduct,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+  createProductReview,
+}

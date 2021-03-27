@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react'
 import {
   IconButton,
   ClickAwayListener,
@@ -7,49 +7,61 @@ import {
   Popper,
   MenuItem,
   MenuList,
-} from "@material-ui/core";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import SettingsIcon from "@material-ui/icons/Settings";
-import PersonIcon from "@material-ui/icons/Person";
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
-import { useHistory } from "react-router";
+} from '@material-ui/core'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import SettingsIcon from '@material-ui/icons/Settings'
+import PersonIcon from '@material-ui/icons/Person'
+import { makeStyles } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
+import { useHistory } from 'react-router'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
+    display: 'flex',
   },
-}));
+}))
+
+const LIST = {
+  users: '/admin/users',
+  products: '/admin/products',
+  orders: '/admin/orders',
+  profile: '/profile',
+}
 
 export default function Modal({ logoutHandler, userInfo, admin }) {
-  const classes = useStyles();
+  const history = useHistory()
+  const classes = useStyles()
 
-  const [open, setOpen] = useState(false);
-  const anchorRef = useRef(null);
+  const [open, setOpen] = useState(false)
+  const anchorRef = useRef(null)
 
-  let history = useHistory();
+  const handleListOfOptions = route => {
+    const page = LIST[route]
+    handleToggle()
+    history.push(page)
+  }
 
   const handleToggle = () => {
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
 
-  const handleClose = (event) => {
+  const handleClose = event => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
+      return
     }
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <div className={classes.root}>
       <IconButton
-        color="inherit"
+        color='inherit'
         ref={anchorRef}
-        aria-controls={open ? "menu-list-grow" : undefined}
+        aria-controls={open ? 'menu-list-grow' : undefined}
         onClick={handleToggle}
       >
-        {!admin && <PersonIcon style={{ marginRight: "5px" }} />}
-        <Typography>{admin ? "Admin" : userInfo.name}</Typography>
+        {!admin && <PersonIcon style={{ marginRight: '5px' }} />}
+        <Typography>{admin ? 'Admin' : userInfo.name}</Typography>
       </IconButton>
       <Popper
         open={open}
@@ -62,27 +74,27 @@ export default function Modal({ logoutHandler, userInfo, admin }) {
           <Grow {...TransitionProps}>
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList autoFocusItem={open} id="menu-list-grow">
+                <MenuList autoFocusItem={open} id='menu-list-grow'>
                   {admin ? (
                     <>
-                      <MenuItem onClick={() => history.push("/admin/users")}>
+                      <MenuItem onClick={() => handleListOfOptions('users')}>
                         Users
                       </MenuItem>
-                      <MenuItem onClick={() => history.push("/admin/products")}>
+                      <MenuItem onClick={() => handleListOfOptions('products')}>
                         Products
                       </MenuItem>
-                      <MenuItem onClick={() => history.push("/admin/orders")}>
+                      <MenuItem onClick={() => handleListOfOptions('orders')}>
                         Orders
                       </MenuItem>
                     </>
                   ) : (
                     <>
-                      <MenuItem onClick={() => history.push("/profile")}>
-                        <SettingsIcon style={{ marginRight: "5px" }} />
+                      <MenuItem onClick={() => handleListOfOptions('profile')}>
+                        <SettingsIcon style={{ marginRight: '5px' }} />
                         Profile
                       </MenuItem>
                       <MenuItem onClick={logoutHandler}>
-                        <ExitToAppIcon style={{ marginRight: "5px" }} />
+                        <ExitToAppIcon style={{ marginRight: '5px' }} />
                         Logout
                       </MenuItem>
                     </>
@@ -94,5 +106,5 @@ export default function Modal({ logoutHandler, userInfo, admin }) {
         )}
       </Popper>
     </div>
-  );
+  )
 }

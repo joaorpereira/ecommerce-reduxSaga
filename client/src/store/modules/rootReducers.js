@@ -14,7 +14,7 @@ export default combineReducers({
   userUpdate: userUpdateReducer,
   products: productsReducer,
   product: productReducer,
-  review: reviewProductReducer,
+  reviewProduct: reviewProductReducer,
   cart: cartReducer,  
   orderCreate: orderCreateReducer,
   orderDetails: orderGetDetailsReducer,

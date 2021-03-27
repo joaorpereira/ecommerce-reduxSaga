@@ -1,0 +1,12 @@
+.Toastify__toast--success {
+  background: #4caf50 !important;
+}
+.Toastify__toast--warning {
+  background: #d92027 !important;
+}
+
+.Toastify__toast-body {
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-size: 0.875rem !important;
+}

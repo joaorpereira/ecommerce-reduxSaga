@@ -1,57 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { Grid } from "@material-ui/core";
-import * as S from "./styled";
+import React, { useEffect, useState } from 'react'
+import { Grid } from '@material-ui/core'
+import * as S from './styled'
 
-import Details from "./Details/Details";
-import AddCart from "./AddCart/AddCart";
-import Button from "../../components/Button/Button";
-import Loading from "../../components/Loading/Loading";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Details from './Details/Details'
+import AddCart from './AddCart/AddCart'
+import Reviews from './Reviews/Reviews'
+import Button from '../../components/Button/Button'
+import Loading from '../../components/Loading/Loading'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
-import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
+import { useHistory, useParams } from 'react-router-dom'
 
-import { productRequest } from "../../store/modules/Product/productActions";
-import { addToCartRequest } from "../../store/modules/Cart/cartActions";
+import {
+  productRequest,
+  reviewProductRequest,
+} from '../../store/modules/Product/productActions'
+import { addToCartRequest } from '../../store/modules/Cart/cartActions'
 
 const Products = () => {
-  const classes = useStyles();
-  const history = useHistory();
-  const dispatch = useDispatch();
+  const classes = useStyles()
+  const history = useHistory()
+  const dispatch = useDispatch()
 
-  const [ quantity, setQuantity ] = useState(1);
-  const [ rating, setRating ] = useState(0);
-  const [ comment, setComment ] = useState('');
+  const [open, setOpen] = useState(false)
+  const [quantity, setQuantity] = useState(1)
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState('')
 
-  const { product, loading } = useSelector((state) => state.product);
-  const review = useSelector((state) => state.review);
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const { product, loading } = useSelector(state => state.product)
+  const reviewProduct = useSelector(state => state.reviewProduct)
+  const { isLoggedIn } = useSelector(state => state.user)
 
-
-  let { id } = useParams();
+  let { id } = useParams()
 
   useEffect(() => {
-    dispatch(productRequest(id));
-  }, [id, dispatch]);
+    dispatch(productRequest(id))
+  }, [id, dispatch])
 
   const addToCartHandler = () => {
     if (isLoggedIn) {
-      dispatch(addToCartRequest({ id, quantity }));
-      history.push("/cart");
+      dispatch(addToCartRequest({ id, quantity }))
+      history.push('/cart')
     } else {
-      history.push("/login");
+      history.push('/login')
     }
-  };
+  }
+
+  const addReviewHandler = () => {
+    const review = { rating, comment }
+    dispatch(reviewProductRequest({ id, review }))
+  }
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3} style={{ margin: "20px 0px", width: "100%" }}>
+      <Grid container spacing={3} style={{ margin: '20px 0px', width: '100%' }}>
         <Button
-          style={{ marginBottom: "30px", marginLeft: "40px" }}
-          onClick={() => history.push("/")}
+          style={{ marginBottom: '30px', marginLeft: '40px' }}
+          onClick={() => history.push('/')}
         >
-          <ArrowBackIcon style={{ marginRight: "5px" }} /> Return
+          <ArrowBackIcon style={{ marginRight: '5px' }} /> Return
         </Button>
         {loading ? (
           <Loading />
@@ -64,7 +73,7 @@ const Products = () => {
               <Grid item xs={12} sm={6} lg={4}>
                 <Details product={product} />
               </Grid>
-              <Grid item xs={12} sm={12} lg={4} className={classes.container}>
+              <Grid item xs={12} sm={6} lg={4} className={classes.container}>
                 <AddCart
                   product={product}
                   addToCartHandler={addToCartHandler}
@@ -72,29 +81,42 @@ const Products = () => {
                   setQuantity={setQuantity}
                 />
               </Grid>
+              <Grid item xs={12} sm={6} lg={4}>
+                <Reviews
+                  product={product}
+                  isLoggedIn={isLoggedIn}
+                  rating={rating}
+                  setRating={setRating}
+                  comment={comment}
+                  setComment={setComment}
+                  open={open}
+                  setOpen={setOpen}
+                  addReviewHandler={addReviewHandler}
+                />
+              </Grid>
             </Grid>
           </div>
         )}
       </Grid>
     </div>
-  );
-};
+  )
+}
 
-export default Products;
+export default Products
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    maxWidth: "100%",
-    margin: "0px",
-    padding: "15px",
-    marginBottom: "50px",
+    maxWidth: '100%',
+    margin: '0px',
+    padding: '15px',
+    marginBottom: '50px',
   },
   product: {
     flexGrow: 1,
   },
   container: {
-    display: "flex",
-    justifyContent: "center",
+    display: 'flex',
+    justifyContent: 'center',
   },
-}));
+}))

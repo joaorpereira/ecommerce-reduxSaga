@@ -67,6 +67,7 @@ function UserList() {
             color='primary'
             className={classes.button}
             style={{ marginRight: '10px' }}
+          
             onClick={() => history.push(`/admin/user/${row.original._id}/edit`)}
           >
             Edit

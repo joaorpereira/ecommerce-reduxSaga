@@ -17,8 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { USER_UPDATE_RESET } from '../../../store/modules/User/userTypes'
 import * as actions from '../../../store/modules/User/userActions'
 
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(6),
     display: 'flex',
@@ -55,38 +54,37 @@ const UserEditList = () => {
   let { id } = useParams()
   const userId = id
 
-  const { loading, user }  = useSelector((state) => state.user)
+  const { loading, user } = useSelector(state => state.user)
 
-  const userUpdate = useSelector((state) => state.userUpdate)
-  const { loading: loadingUpdate, success: successUpdate } = userUpdate
+  const { loading: loadingUpdate, success: successUpdate } = useSelector(state => state.userUpdate)
 
   useEffect(() => {
-    const { name, _id, email, isAdmin } = user
-
     if (successUpdate) {
       dispatch({ type: USER_UPDATE_RESET })
       history.push('/admin/users')
     } else {
-      if (!name || _id !== userId) {
+      if (!user.name || user._id !== userId) {
         dispatch(actions.getUserDetailsRequest(userId))
       } else {
-        setName(name)
-        setEmail(email)
-        setIsAdmin(isAdmin)
+        setName(user.name)
+        setEmail(user.email)
+        setIsAdmin(user.isAdmin)
       }
     }
   }, [dispatch, user, userId, successUpdate, history])
 
-  const updateHandler = (e) => {
+  const updateHandler = e => {
     e.preventDefault()
-    dispatch(actions.updateUserProfileRequest({ _id: userId, name, email, isAdmin }))
+    dispatch(
+      actions.updateUserProfileRequest({ _id: userId, name, email, isAdmin })
+    )
   }
 
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
-      {loading && <Loading/>}
-      {loadingUpdate && <Loading/>}
+      {loading && <Loading />}
+      {loadingUpdate && <Loading />}
       <div className={classes.paper}>
         <h2>Edit User</h2>
         <form className={classes.form} onSubmit={updateHandler}>
@@ -98,7 +96,7 @@ const UserEditList = () => {
             label='Name'
             autoFocus
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={e => setName(e.target.value)}
           />
           <TextField
             variant='outlined'
@@ -107,10 +105,16 @@ const UserEditList = () => {
             fullWidth
             label='Email'
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
           <FormControlLabel
-            control={<Checkbox checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} color='primary' />}
+            control={
+              <Checkbox
+                checked={isAdmin}
+                onChange={e => setIsAdmin(e.target.checked)}
+                color='primary'
+              />
+            }
             label='Is Admin'
           />
           <S.Box>
@@ -124,12 +128,12 @@ const UserEditList = () => {
             >
               Return
             </Button>
-            <Button 
-              type='submit' 
+            <Button
+              type='submit'
               size='large'
-              fullWidth 
-              variant='contained' 
-              color='primary' 
+              fullWidth
+              variant='contained'
+              color='primary'
               className={classes.button}
             >
               Update
