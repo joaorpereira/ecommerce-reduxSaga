@@ -38,7 +38,6 @@ const Home = () => {
   const [newList, setNewList] = useState(null)
 
   const products = useSelector(state => state.products)
-  const { isLoggedIn } = useSelector(state => state.user)
   const { loading, products: productsList } = products
 
   useLayoutEffect(() => {
@@ -66,12 +65,8 @@ const Home = () => {
   }
 
   const addToCartHandler = id => {
-    if (isLoggedIn && id) {
-      dispatch(addToCartRequest({ id: id, quantity: 1 }))
-      history.push('/cart')
-    } else {
-      history.push('/login')
-    }
+    dispatch(addToCartRequest({ id: id, quantity: 1 }))
+    history.push('/cart')
   }
 
   const body =
@@ -101,13 +96,17 @@ const Home = () => {
         </Grid>
       ))
 
-  const sortedProductsByRating = products.products.sort((a, b) => a.rating - b.rating)
-      
-  const lastThreeProducts = sortedProductsByRating.slice(Math.max(sortedProductsByRating.length - 3, 1))
+  const sortedProductsByRating = products.products.sort(
+    (a, b) => a.rating - b.rating
+  )
+
+  const lastThreeProducts = sortedProductsByRating.slice(
+    Math.max(sortedProductsByRating.length - 3, 1)
+  )
 
   return (
     <div className={classes.root}>
-      <CarouselSlide products={lastThreeProducts}/>
+      <CarouselSlide products={lastThreeProducts} />
       <FormControlLabel
         style={{ marginLeft: '70px' }}
         control={<Switch checked={checked} onChange={handleFilter} />}
