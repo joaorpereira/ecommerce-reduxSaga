@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-  baseURL: process.env.REACT_APP_PORT || 'http://localhost:5000/',
+  baseURL: process.env.PORT || 'http://localhost:5000/',
 })
