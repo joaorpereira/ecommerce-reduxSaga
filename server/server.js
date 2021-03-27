@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import path from 'path'
-import morgan from 'morgan'
+// import morgan from 'morgan'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
@@ -14,9 +14,9 @@ connectDB()
 
 const app = express()
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'))
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.use(morgan('dev'))
+// }
 
 express(cors())
 app.use(express.json())
@@ -37,10 +37,10 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   )
-} 
+}
 
-const PORT = process.env.PORT || 5000
-
-app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV} on port ${PORT}`)
+app.listen(process.env.PORT || 5000, () => {
+  console.log(
+    `Server running in ${process.env.NODE_ENV} on port ${process.env.PORT}`
+  )
 })
