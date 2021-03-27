@@ -13,12 +13,24 @@ const useStyles = makeStyles({
   },
 })
 
-const OrderSummary = ({ order, sdkReady, loadingPay, user, deliverHandler, successPaymentHandler }) => {
+const OrderSummary = ({
+  order,
+  sdkReady,
+  loadingPay,
+  user,
+  deliverHandler,
+  successPaymentHandler,
+}) => {
   const classes = useStyles()
 
-  const { totalPrice, shippingPrice, taxPrice, orderItems, isPaid, isDelivered } = order
-
-  console.log(user)
+  const {
+    totalPrice,
+    shippingPrice,
+    taxPrice,
+    orderItems,
+    isPaid,
+    isDelivered,
+  } = order
 
   return (
     <Card className={classes.root} variant='outlined'>
@@ -49,19 +61,24 @@ const OrderSummary = ({ order, sdkReady, loadingPay, user, deliverHandler, succe
         <S.StyledDivider />
         {!isPaid && (
           <div style={{ marginTop: '10px' }}>
-            {loadingPay && <Loading/>}
-            {sdkReady && <PayPalButton amount={totalPrice} onSuccess={successPaymentHandler} />}
+            {loadingPay && <Loading />}
+            {sdkReady && (
+              <PayPalButton
+                amount={totalPrice}
+                onSuccess={successPaymentHandler}
+              />
+            )}
           </div>
         )}
         {user.isAdmin && isPaid && !isDelivered && (
-          <Button 
-            onClick={deliverHandler} 
-            fullWidth 
-            variant='contained' 
-            color='primary' 
+          <Button
+            onClick={deliverHandler}
+            fullWidth
+            variant='contained'
+            color='primary'
           >
             Mark as Delivered
-          </Button>          
+          </Button>
         )}
       </S.StyledCardContent>
     </Card>

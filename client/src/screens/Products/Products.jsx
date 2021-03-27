@@ -30,7 +30,6 @@ const Products = () => {
   const [comment, setComment] = useState('')
 
   const { product, loading } = useSelector(state => state.product)
-  const reviewProduct = useSelector(state => state.reviewProduct)
   const { isLoggedIn } = useSelector(state => state.user)
 
   let { id } = useParams()

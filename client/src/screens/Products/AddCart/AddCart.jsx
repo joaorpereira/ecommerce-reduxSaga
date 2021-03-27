@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import {
   Divider,
   FormControl,
@@ -8,26 +8,26 @@ import {
   Typography,
   CardContent,
   Card,
-} from "@material-ui/core";
+} from '@material-ui/core'
 
-import Button from "../../../components/Button/Button";
-import { StyledCardActions } from "./styled";
+import Button from '../../../components/Button/Button'
+import { StyledCardActions } from './styled'
 
 const AddCart = ({ product, addToCartHandler, setQuantity, quantity }) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const { countInStock, price } = product;
+  const { countInStock, price } = product
 
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card className={classes.root} variant='outlined'>
       <CardContent>
-        <Typography style={{ margin: "10px 0px" }}>
+        <Typography style={{ margin: '10px 0px' }}>
           <strong>Price:</strong>&nbsp;${price}
         </Typography>
         <Divider />
-        <Typography style={{ margin: "10px 0px" }}>
+        <Typography style={{ margin: '10px 0px' }}>
           <strong>Status:</strong>&nbsp;
-          {countInStock > 0 ? "In stock" : "Out of stock"}
+          {countInStock > 0 ? 'In stock' : 'Out of stock'}
         </Typography>
         <Divider />
         {countInStock > 0 ? (
@@ -36,16 +36,16 @@ const AddCart = ({ product, addToCartHandler, setQuantity, quantity }) => {
               <strong>Quantity:</strong>&nbsp;
             </Typography>
             <FormControl
-              size="small"
-              variant="outlined"
+              size='small'
+              variant='outlined'
               className={classes.formControl}
             >
               <Select
-                labelId="quantity"
+                labelId='quantity'
                 value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={e => setQuantity(e.target.value)}
               >
-                {[...Array(countInStock).keys()].map((x) => (
+                {[...Array(countInStock).keys()].map(x => (
                   <MenuItem key={x + 1} value={x + 1}>
                     {x + 1}
                   </MenuItem>
@@ -55,55 +55,55 @@ const AddCart = ({ product, addToCartHandler, setQuantity, quantity }) => {
             <Divider />
           </div>
         ) : (
-          <div style={{ height: "60px" }} />
+          <div style={{ height: '60px' }} />
         )}
       </CardContent>
       <StyledCardActions>
         <Button
           className={classes.button}
           fullWidth
-          variant="contained"
-          size="big"
-          color="secondary"          
-          disable={countInStock === 0}
+          variant='contained'
+          size='medium'
+          color='secondary'
+          disabled={countInStock === 0}
           onClick={addToCartHandler}
         >
           Add to Cart
         </Button>
       </StyledCardActions>
     </Card>
-  );
-};
+  )
+}
 
-export default AddCart;
+export default AddCart
 
 const useStyles = makeStyles({
   root: {
     width: 275,
     maxHeight: 240,
-    borderRadius: "10px",
+    borderRadius: '10px',
   },
   title: {
     fontSize: 14,
   },
   formControl: {
-    width: "70px",
-    margin: "10px 00px 10px 5px",
+    width: '70px',
+    margin: '10px 00px 10px 5px',
   },
   label: {
-    backgroundColor: "#fff",
-    padding: "0px 5px",
-    color: "#000",
+    backgroundColor: '#fff',
+    padding: '0px 5px',
+    color: '#000',
   },
   button: {
-    marginTop: "-10px",
-    width: "220px",
-    boxShadow: "none",
+    marginTop: '-10px',
+    width: '220px',
+    boxShadow: 'none',
     color: '#fff',
     fontWeight: 900,
   },
-  quantity:{
-    display:'flex',
+  quantity: {
+    display: 'flex',
     alignItems: 'center',
-  }
-});
+  },
+})
