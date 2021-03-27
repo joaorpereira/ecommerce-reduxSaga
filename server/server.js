@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import path from 'path'
-import morgan from 'morgan'
+// import morgan from 'morgan'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
@@ -14,9 +14,9 @@ connectDB()
 
 const app = express()
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'))
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.use(morgan('dev'))
+// }
 
 express(cors())
 app.use(express.json())
