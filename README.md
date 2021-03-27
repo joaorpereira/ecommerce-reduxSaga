@@ -48,6 +48,8 @@ Um projeto fullstack, desenvolvido em cima de uma API Rest com Node.JS / MongoDb
 
 Este projeto foi realizado como desafio técnico para a fim de melhorar minha habilidades como **Frontend Developer** e aprender a utilizar o **Redux Saga**.
 
+O projeto pode ser acessado no link: https://ecoshop-app.herokuapp.com/
+
 ---
 #### 💻 FrontEnd
 
@@ -64,14 +66,12 @@ Este projeto foi realizado como desafio técnico para a fim de melhorar minha ha
  - [x] 💯 Implementação das funcionalidades do sistema de usuários (compra, checkout, lista de ordens, pagamento (Paypal);
  - [x] 💯 Implementação das funcionalidades do sistema de administração (lista de ordens, lista de usuários, lista/criação de produtos;
  - [x] 💯 Configuração do gerenciamento de estado **Redux Thunks** com posterior migração para o **Redux Saga**;
- 
+ - [x] 💯 Implementar *filtro* na home page;
+ - [x] 💯 Melhorar design das páginas;
+ - [x] 💯 Implementar da funcionalidade avaliação de produtos;
+ - [x] 💯 Deploy no Heroku;
 ##### 👉 Novas implementações/features a serem realizadas(sem ordem definida):
- - [ ] 👨‍💻  Implementar *paginação, ordenação, filtro* na tabela de histórico de Vendas;
- - [ ] 👨‍💻  Implementar *filtro* na home page;
- - [ ] 👨‍💻  Melhorar design das páginas;
- - [ ] 👨‍💻  Implementar da funcionalidade avaliação de produtos;
  - [ ] 👨‍💻  Gerenciar os formulário por meio do Formik;
- - [ ] 👨‍💻  Deploy no Heroku;
 
 ---
 ### 🛠 Tecnologias utilizadas
