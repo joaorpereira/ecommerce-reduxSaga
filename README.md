@@ -44,7 +44,7 @@
 
 **Ecommerce Project** is a product sales control system over the internet.
 
-A fullstack project, developed on top of a Rest API with Node.JS / MongoDb and web Front end with ReactJS.
+A fullstack project where backend was developed as Rest API with Node.JS / MongoDb and Frontend with ReactJS.
 
 This project was done as a technical challenge to improve my skills as a **Frontend Developer** and learn to use **Redux Saga**.
 
@@ -109,12 +109,12 @@ The following technologies/tools were used:
 
 ```bash
 
-#->In the terminal:
+#-> In the terminal:
 
 # Clone repository:
 $ git clone https://github.com/joaorpereira/ecommerce-reduxSaga.git
 
-# Entrar no diretório desejado:
+# Enter the desired directory:
 -> $ cd client
 -> $ cd server
 
