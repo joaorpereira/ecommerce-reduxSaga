@@ -31,24 +31,24 @@
 ---
 
 <p align="center">
- <a href="#-sobre">Sobre</a> •
- <a href="#-etapas-do-projeto">Etapas do projeto</a> • 
- <a href="#-tecnologias-utilizadas">Tecnologias</a> • 
- <a href="#-como-baixar-o-projeto">Como baixar o projeto</a> • 
- <a href="#-licença">Licença</a> • 
- <a href="#-desenvolvedor">Desenvolvedor</a>
+ <a href="#-about">About</a> •
+ <a href="#-project-steps">Project steps</a> • 
+ <a href="#-technologies">Technologies</a> • 
+ <a href="#-how-to-download-the-project">How to download the project</a> • 
+ <a href="#-license">License</a> • 
+ <a href="#-developer">Developer</a>
 </p>
 
 ---
-### 🔖 Sobre
+### 🔖 About
 
-O **Projeto Ecommerce** é um sistema de controle de vendas de produtos pela internet.
+**Ecommerce Project** is a product sales control system over the internet.
 
-Um projeto fullstack, desenvolvido em cima de uma API Rest com Node.JS / MongoDb e Front end web com ReactJS.
+A fullstack project, developed on top of a Rest API with Node.JS / MongoDb and web Front end with ReactJS.
 
-Este projeto foi realizado como desafio técnico para a fim de melhorar minha habilidades como **Frontend Developer** e aprender a utilizar o **Redux Saga**.
+This project was done as a technical challenge to improve my skills as a **Frontend Developer** and learn to use **Redux Saga**.
 
-O projeto pode ser acessado no link: https://ecoshop-app.herokuapp.com/
+The project can be accessed at the link: https://ecoshop-app.herokuapp.com/
 
 ---
 #### 💻 FrontEnd
@@ -58,25 +58,24 @@ O projeto pode ser acessado no link: https://ecoshop-app.herokuapp.com/
 </p>
 
 ---
-### 📝 Etapas do projeto
+### 📝 Project steps
 
- - [x] 💯 Construção de Layout;
- - [x] 💯 Construção da API Rest com Node.js / MongoDb;
- - [x] 💯 Implementação da regra de negócio;
- - [x] 💯 Implementação das funcionalidades do sistema de usuários (compra, checkout, lista de ordens, pagamento (Paypal);
- - [x] 💯 Implementação das funcionalidades do sistema de administração (lista de ordens, lista de usuários, lista/criação de produtos;
- - [x] 💯 Configuração do gerenciamento de estado **Redux Thunks** com posterior migração para o **Redux Saga**;
- - [x] 💯 Implementar *filtro* na home page;
- - [x] 💯 Melhorar design das páginas;
- - [x] 💯 Implementar da funcionalidade avaliação de produtos;
- - [x] 💯 Deploy no Heroku;
-##### 👉 Novas implementações/features a serem realizadas(sem ordem definida):
- - [ ] 👨‍💻  Gerenciar os formulário por meio do Formik;
+ - [x] 💯 Build the webpage layout;
+ - [x] 💯 Build the API Rest using Node.js and MongoDb as Database;
+ - [x] 💯 Business rule implementation;
+ - [x] 💯 Implementation of user system functionalities (purchase, checkout, order list, payment (Paypal);
+ - [x] 💯 Implementation of administration system functionalities (order list, user list, product list/creation;
+ - [x] 💯 Configuration of state management using **Redux Thunks**
+ - [X] 💯 Migration of state manager framework from **Redux Thunks** to **Redux Saga**;
+ - [x] 💯 Implement *filter* on home page;
+ - [x] 💯 Improve page design;
+ - [x] 💯 Implement the product evaluation functionality;
+ - [x] 💯 Deploy on Heroku;
 
 ---
-### 🛠 Tecnologias utilizadas
+### 🛠 Technologies
 
-As seguintes tecnologias/ferramentas foram utilizadas:
+The following technologies/tools were used:
 
 - [JavaScript](https://www.javascript.com/);
 - [ECS6+](http://www.ecma-international.org/ecma-262/6.0/);
@@ -98,53 +97,53 @@ As seguintes tecnologias/ferramentas foram utilizadas:
 - [VSCode](https://code.visualstudio.com/);
 
 ---
-### 📎 Como baixar o projeto
+### 📎 How to download the project
 
-##### 👉 Ferramentas necessárias:
+##### 👉 Tools needed:
 - Editor:
-- [Vscode](https://code.visualstudio.com/) foi utilizado nesse projeto; 
-- [Node.Js](https://nodejs.org/en/) - Instalado em sua máquina;
-- [Git](https://git-scm.com/downloads) - Instalado em sua máquina;
+- [Vscode](https://code.visualstudio.com/) was used in this project; 
+- [Node.Js](https://nodejs.org/en/) - Installed on your machine;
+- [Git](https://git-scm.com/downloads) - Installed on your machine;
 
-##### 👉 Instalar dependências:
+##### 👉 Install dependencies:
 
 ```bash
 
-#->No terminal:
+#->In the terminal:
 
-# Clonar repositório:
+# Clone repository:
 $ git clone https://github.com/joaorpereira/ecommerce-reduxSaga.git
 
 # Entrar no diretório desejado:
 -> $ cd client
 -> $ cd server
 
-# Instalar dependências
-$ npm install  # No root
-$ npm install  # No client
+# Install dependencies:
+$ npm install  # In the root
+$ npm install  # In the client
 
-# Iniciar o projeto
-$ npm run dev  # No root
-$ npm start    # No client
-$ npm start    # No server
+# Start the project
+$ npm run dev  # In the root
+$ npm start    # In the client
+$ npm start    # In the server
 
-# Após carregar o projeto automaticamente irá abrir uma guia no navegador padrão.
+# After loading the project it will automatically open a tab in the default browser.
 
 ```
 ---
-### 📜 Licença
+### 📜 License
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+This project is under the MIT license. See the [LICENSE](LICENSE) file for more details.
 
 ---
 
-### 👨‍💻 Desenvolvedor
+### 👨‍💻 Developer
 
 <p align="center">
     <a href="https://blog.rocketseat.com.br/author/thiago/">
         <img 
             style="border-radius: 50%;" 
-            src="https://media-exp1.licdn.com/dms/image/C4D03AQGEHyoBgJ7tNQ/profile-displayphoto-shrink_200_200/0/1597502062146?e=1617235200&v=beta&t=n4EVd2fDroZ4tR3DiY6iXIs-27xhiGXwwoRuZh10ElQ" 
+            src="https://media-exp1.licdn.com/dms/image/C4D03AQGEHyoBgJ7tNQ/profile-displayphoto-shrink_800_800/0/1597502062146?e=1628121600&v=beta&t=AbvIQkPAphQS5FUPvRdSFk3rMuyJ79HSPPnsv-fhym8" 
             width="120px;" 
             alt="Foto">
         <br/>
@@ -153,7 +152,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 </p>
 </br>
 <h6 align="center">
-    Desenvolvido por Joao Paulo.
+    Developed by Joao Paulo.
 </h6>
 
 <p align="center">
